@@ -7,6 +7,8 @@ import (
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/hyperledger/fabric/protos/peer"
+
+	"github.com/golang/snappy"
 )
 
 type SimpleAsset struct {
@@ -15,6 +17,8 @@ type SimpleAsset struct {
 func (t *SimpleAsset) Init(stub shim.ChaincodeStubInterface) peer.Response {
 	fmt.Printf("Hey!!")
 	secp256k1.CompressPubkey(big.NewInt(0), big.NewInt(1))
+	dst := []byte{}
+	snappy.Encode(dst, []byte("hi"))
 	return shim.Success(nil)
 }
 
